@@ -35,17 +35,11 @@ export const resolvers = {
             args:{origen:string,destino:string,fecha:string},
             context: { VuelosCollection: Collection<VuelosModel>}
         ):Promise<Vuelos> => {
-            const { insertedId } = await context.VuelosCollection.insertOne({
-                origen: args.origen,
-                destino: args.destino,
-                fecha: args.fecha
-            })
-            return ({
+            const { insertedId } = await context.VuelosCollection.insertOne(args)
+            return {
                 id: insertedId.toString(),
-                origen: args.origen,
-                destino: args.destino,
-                fecha: args.fecha
-            })
+                ...args
+            }
         }
     }
 }
