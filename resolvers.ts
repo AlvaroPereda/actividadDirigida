@@ -9,23 +9,9 @@ export const resolvers = {
             args: {origen:string,destino:string},
             context: { VuelosCollection: Collection<VuelosModel> }
         ):Promise<Vuelos[]> => {
-            if(args.origen && args.destino) {
-                const result = await context.VuelosCollection.find({origen:args.origen,destino:args.destino}).toArray()
-                const resultFinal = result.map(e => change(e))
-                return resultFinal
-            } else if(args.origen) {
-                const result = await context.VuelosCollection.find({origen:args.origen}).toArray()
-                const resultFinal = result.map(e => change(e))
-                return resultFinal
-            } else if(args.destino) {
-                const result = await context.VuelosCollection.find({destino:args.destino}).toArray()
-                const resultFinal = result.map(e => change(e))
-                return resultFinal
-            } else {
-                const result = await context.VuelosCollection.find().toArray()
-                const resultFinal = result.map(e => change(e))
-                return resultFinal
-            }
+            const result = await context.VuelosCollection.find().toArray()
+            const resultFinal = result.map(e => change(e))
+            return resultFinal
         },
 
         getFlight: async(
