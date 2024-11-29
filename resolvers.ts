@@ -18,7 +18,7 @@ export const resolvers = {
             _:unknown,
             args: {id:string},
             context: { VuelosCollection: Collection<VuelosModel> }
-        ) => {
+         ):Promise<Vuelos|null> => {
             const aux = await context.VuelosCollection.findOne({_id:new ObjectId(args.id)})
             if (!aux) return null
             return ({
