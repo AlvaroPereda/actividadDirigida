@@ -9,7 +9,7 @@ export const resolvers = {
             args: {origen:string,destino:string},
             context: { VuelosCollection: Collection<VuelosModel> }
         ):Promise<Vuelos[]> => {
-            const result = await context.VuelosCollection.find().toArray()
+            const result = await context.VuelosCollection.find(args).toArray()
             const resultFinal = result.map(e => change(e))
             return resultFinal
         },
